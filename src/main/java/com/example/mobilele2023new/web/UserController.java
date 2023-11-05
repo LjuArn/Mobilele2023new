@@ -113,12 +113,12 @@ public class UserController {
     }
 
 
-//    @GetMapping("/logout")
-//    public String logOut() {
-//        userService.logOut();
-//        return "redirect:/";
-//    }
-//
+    @GetMapping("/logout")
+    public String logOut() {
+        userService.logOut();
+        return "redirect:/";
+    }
+
 
 
 }
