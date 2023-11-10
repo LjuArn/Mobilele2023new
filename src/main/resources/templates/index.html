@@ -1,7 +1,8 @@
 <!DOCTYPE html>
 <html lang="en"
       xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:th="http://www.thymeleaf.org">
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec='http://www.thymeleaf.org/extras/spring-security'>
 
 <head th:replace="~{fragments/commons::head}">
 </head>
@@ -16,13 +17,19 @@
 
 <div class="container-fluid">
 
-        <h5 class="text-center text-white mt-5"> Welcome to MobiLeLeLe,
-            <th:block th:if="${@currentUser.id == null}" th:text="Anonimos"></th:block>
-    <th:block th:unless="${@currentUser.id == null}" th:text="${@currentUser.getUsername()}"></th:block>
+    <h5 class="text-center text-white mt-5"> Welcome to MobiLeLeLe,
+
+        <th:block sec:authorize='isAuthenticated()'>
+            <th:block sec:authentication="name"> </th:block>
+        </th:block>
+
+        <th:block sec:authorize='!isAuthenticated()'>
+           Anonymous!!!!!!
+        </th:block>
+
     </h5>
 
 </div>
-
 
 
 </body>

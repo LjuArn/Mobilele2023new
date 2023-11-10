@@ -1,7 +1,8 @@
 <!DOCTYPE html>
 <html lang="en"
       xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:th="http://www.thymeleaf.org">
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec='http://www.thymeleaf.org/extras/spring-security'>
 
 <head th:replace="~{fragments/commons::head}">
 </head>
@@ -27,6 +28,7 @@
                 <input th:field="*{firstName}"
                        th:errorclass="is-invalid"
                        id="firstName"
+                       name="firstName"
                        type="text"
                        required minlength="1" maxlength="20"
                        class="form-control"
@@ -40,6 +42,7 @@
                 <input th:field="*{lastName}"
                        th:errorclass="is-invalid"
                        id="lastName"
+                       name="lastName"
                        type="text"
                        required minlength="1" maxlength="20"
                        class="form-control"
@@ -57,6 +60,7 @@
                 <input th:field="*{username}"
                        th:errorclass="is-invalid"
                        id="username"
+                       name="username"
                        type="text"
                        required minlength="1" maxlength="20"
                        class="form-control"
@@ -65,14 +69,15 @@
                 <small class="invalid-feedback errors alert alert-danger">Username length must be between 2 and 20 characters</small>
             </div>
 
-            <small th:if="${isNameExist}" id="usernameUniqueError"
-                   class=" bg-danger rounded">Username is already occupied</small>
+<!--            <small th:if="${isNameExist}" id="usernameUniqueError"-->
+<!--                   class=" bg-danger rounded">Username is already occupied</small>-->
 
             <div class="form-group col-md-6 mb-3">
                 <label for="email" class="text-white font-weight-bold">Email</label>
                 <input th:field="*{email}"
                        th:errorclass="is-invalid"
                        id="email"
+                       name="email"
                        type="email"
                        required
                        class="form-control"
@@ -89,6 +94,7 @@
                 <input th:field="*{password}"
                        th:errorclass="is-invalid"
                        id="password"
+                       name="password"
                        type="password"
                        required minlength="1" maxlength="20"
                        class="form-control"
@@ -102,6 +108,7 @@
                 <input th:field="*{confirmPassword}"
                        th:errorclass="is-invalid"
                        id="confirmPassword"
+                       name="confirmPassword"
                        type="password"
                        required minlength="1" maxlength="20"
                        class="form-control"

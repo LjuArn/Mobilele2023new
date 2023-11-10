@@ -3,10 +3,6 @@ package com.example.mobilele2023new.domain.entity;
 import com.example.mobilele2023new.domain.enums.EngineEnum;
 import com.example.mobilele2023new.domain.enums.TransmissionEnum;
 import jakarta.persistence.*;
-import jakarta.validation.constraints.Min;
-import jakarta.validation.constraints.NotEmpty;
-import jakarta.validation.constraints.NotNull;
-import jakarta.validation.constraints.Positive;
 import java.math.BigDecimal;
 import java.time.Instant;
 
@@ -16,30 +12,25 @@ import java.time.Instant;
 public class OfferEntity extends BaseEntity {
 
 
-    @Column(columnDefinition = "TEXT")
-    @NotEmpty
+    @Column(nullable = false, columnDefinition = "TEXT")
     private String description;
 
     @Enumerated(EnumType.STRING)
     private EngineEnum engine;
 
     @Column
-    @NotEmpty
     private String imageUrl;
 
-    @Column
-    @Positive
+    @Column(nullable = false)
     private Integer mileage;
 
-    @Column
-    @NotNull
+    @Column(nullable = false)
     private BigDecimal price;
 
     @Enumerated(EnumType.STRING)
     private TransmissionEnum transmission;
 
-    @Column
-    @Min(1930)
+    @Column(nullable = false)
     private int year;
 
     @Column
