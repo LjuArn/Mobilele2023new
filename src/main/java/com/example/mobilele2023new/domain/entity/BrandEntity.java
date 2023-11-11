@@ -19,7 +19,7 @@ public class BrandEntity extends BaseEntity {
     @Column
     private Instant modified;
 
-    @OneToMany(mappedBy = "brand", fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "brand", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     private List<ModelEntity> models;
 
 

@@ -31,7 +31,7 @@ public class ModelEntity extends BaseEntity {
     @Column
     private Instant modified;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.MERGE)
     @JoinColumn(name = "brand_id")
     private BrandEntity brand;
 
