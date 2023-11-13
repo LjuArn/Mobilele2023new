@@ -1,6 +1,7 @@
 package com.example.mobilele2023new.configuration;//package com.example.mobilele2023new.configuration;
 
 
+import com.example.mobilele2023new.domain.enums.UserRoleEnum;
 import com.example.mobilele2023new.repository.UserRepository;
 import com.example.mobilele2023new.service.MobileUserDetailService;
 import org.springframework.boot.autoconfigure.security.servlet.PathRequest;
@@ -25,17 +26,18 @@ public class SecurityConfiguration {
         httpSecurity
                 .authorizeHttpRequests(authorizeHttpRequests -> authorizeHttpRequests
                         .requestMatchers(PathRequest.toStaticResources().atCommonLocations()).permitAll()
-                        .requestMatchers("/", "/users/register", "/users/login", "/users/login?error=true").permitAll()
+                        .requestMatchers("/", "/users/register", "/users/login", "/users/login-error").permitAll()
                         .requestMatchers("/about").permitAll()
                         .requestMatchers("/favicon.ico", "/resources/**", "/error").permitAll()
                         .requestMatchers("/users/profile").authenticated()
+                        .requestMatchers("/brands").hasRole(UserRoleEnum.ADMIN.name())
                         .anyRequest().authenticated())
                 .formLogin(formLogin -> {
                     formLogin.loginPage("/users/login")
                             .usernameParameter("username")
                             .passwordParameter("password")
                             .defaultSuccessUrl("/")
-                            .failureForwardUrl("/users/login?error=true")
+                            .failureForwardUrl("/users/login-error")
                             .permitAll();
                 }).logout(logout -> {
                     logout.logoutUrl("/users/logout")
