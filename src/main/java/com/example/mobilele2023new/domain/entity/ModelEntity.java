@@ -20,10 +20,10 @@ public class ModelEntity extends BaseEntity {
     private String imageUrl;
 
     @Column
-    private int startYear;
+    private Integer startYear;
 
     @Column
-    private int endYear;
+    private Integer endYear;
 
     @Column
     private Instant created;
@@ -65,20 +65,20 @@ public class ModelEntity extends BaseEntity {
         return this;
     }
 
-    public int getStartYear() {
+    public Integer getStartYear() {
         return startYear;
     }
 
-    public ModelEntity setStartYear(int startYear) {
+    public ModelEntity setStartYear(Integer startYear) {
         this.startYear = startYear;
         return this;
     }
 
-    public int getEndYear() {
+    public Integer getEndYear() {
         return endYear;
     }
 
-    public ModelEntity setEndYear(int endYear) {
+    public ModelEntity setEndYear(Integer endYear) {
         this.endYear = endYear;
         return this;
     }

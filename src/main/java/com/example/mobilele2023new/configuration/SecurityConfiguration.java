@@ -27,7 +27,7 @@ public class SecurityConfiguration {
                 .authorizeHttpRequests(authorizeHttpRequests -> authorizeHttpRequests
                         .requestMatchers(PathRequest.toStaticResources().atCommonLocations()).permitAll()
                         .requestMatchers("/", "/users/register", "/users/login", "/users/login-error").permitAll()
-                        .requestMatchers("/about").permitAll()
+                        .requestMatchers("/about", "/error").permitAll()
                         .requestMatchers("/favicon.ico", "/resources/**", "/error").permitAll()
                         .requestMatchers("/users/profile").authenticated()
                         .requestMatchers("/brands").hasRole(UserRoleEnum.ADMIN.name())
