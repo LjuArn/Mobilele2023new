@@ -7,6 +7,7 @@ import com.example.mobilele2023new.service.MobileUserDetailService;
 import org.springframework.boot.autoconfigure.security.servlet.PathRequest;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -29,6 +30,7 @@ public class SecurityConfiguration {
                         .requestMatchers("/", "/users/register", "/users/login", "/users/login-error").permitAll()
                         .requestMatchers("/about", "/error").permitAll()
                         .requestMatchers("/favicon.ico", "/resources/**", "/error").permitAll()
+                        .requestMatchers(HttpMethod.GET, "/offers/**").permitAll()
                         .requestMatchers("/users/profile").authenticated()
                         .requestMatchers("/brands").hasRole(UserRoleEnum.ADMIN.name())
                         .anyRequest().authenticated())

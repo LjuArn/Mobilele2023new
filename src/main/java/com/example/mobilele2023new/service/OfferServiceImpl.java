@@ -2,8 +2,10 @@ package com.example.mobilele2023new.service;
 
 import com.example.mobilele2023new.domain.entity.OfferEntity;
 import com.example.mobilele2023new.domain.serviceModel.CreateOfferModel;
+import com.example.mobilele2023new.domain.serviceModel.OfferAllServiceModel;
 import com.example.mobilele2023new.domain.serviceModel.OfferSummeryModel;
 import com.example.mobilele2023new.repository.OfferRepository;
+import org.hibernate.ObjectNotFoundException;
 import org.modelmapper.ModelMapper;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -46,6 +48,22 @@ public class OfferServiceImpl implements OfferService {
 
         return test;
 
+    }
+
+    @Override
+    public OfferAllServiceModel findOfferById(Long id) {
+        OfferAllServiceModel offerAllinfo = offerRepository
+                .findById(id)
+                .map(offerEntity -> {
+                    OfferAllServiceModel offerAllServiceModel = modelMapper.map(offerEntity, OfferAllServiceModel.class);
+                    offerAllServiceModel.setModel(offerEntity.getModel().getName());
+                    offerAllServiceModel.setBrand(offerEntity.getModel().getBrand().getName());
+
+                //    offerAllServiceModel.setSeller(offerEntity.getSeller().getFirstName());
+               //     offerAllServiceModel.setSeller(offerEntity.getSeller().getLastName());
+                    return offerAllServiceModel;
+                }).orElseThrow(() -> new ObjectNotFoundException());
+        return offerAllinfo;
     }
 
 }

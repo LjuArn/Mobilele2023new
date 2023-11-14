@@ -2,8 +2,10 @@ package com.example.mobilele2023new.web;
 
 import com.example.mobilele2023new.domain.bindingModel.CreateOfferBindingModel;
 import com.example.mobilele2023new.domain.serviceModel.CreateOfferModel;
+import com.example.mobilele2023new.domain.serviceModel.OfferAllServiceModel;
 import com.example.mobilele2023new.service.OfferService;
 import jakarta.validation.Valid;
+import org.hibernate.ObjectNotFoundException;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -60,7 +62,16 @@ public class OfferController {
     @GetMapping("/details/{id}")
     public String details(@PathVariable Long id, Model model) {
 
-//
+        OfferAllServiceModel offerAllServiceModel = offerService
+                .findOfferById(id)
+                .orElseThrow(() -> new ObjectNotFoundException("Offer with uuid " + id + " not found!"));
+
+        model.addAttribute("offer", offerService.findOfferById(id));
+  //      model.addAttribute("sellerFirstName", offerService.findOfferById(id).getSeller().);
+
+
+
+
 //        model.addAttribute("route", routeService.findRouteById(id));
 //        model.addAttribute("authorName", routeService.findRouteById(id).getAuthor().getUsername());
 
