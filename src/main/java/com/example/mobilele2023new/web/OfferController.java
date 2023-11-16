@@ -62,13 +62,9 @@ public class OfferController {
     @GetMapping("/details/{id}")
     public String details(@PathVariable Long id, Model model) {
 
-        OfferAllServiceModel offerAllServiceModel = offerService
-                .findOfferById(id)
-                .orElseThrow(() -> new ObjectNotFoundException("Offer with uuid " + id + " not found!"));
 
         model.addAttribute("offer", offerService.findOfferById(id));
   //      model.addAttribute("sellerFirstName", offerService.findOfferById(id).getSeller().);
-
 
 
 
@@ -77,6 +73,11 @@ public class OfferController {
 
         return "details";
     }
+
+
+    //    OfferAllServiceModel offerAllServiceModel = offerService
+    //                .findOfferById(id)
+    //                .orElseThrow(() -> new ObjectNotFoundException("Offer with uuid " + id + " not found!"));
 
 
 }

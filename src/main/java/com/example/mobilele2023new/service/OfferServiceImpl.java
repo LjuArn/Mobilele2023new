@@ -62,11 +62,11 @@ public class OfferServiceImpl implements OfferService {
                 //    offerAllServiceModel.setSeller(offerEntity.getSeller().getFirstName());
                //     offerAllServiceModel.setSeller(offerEntity.getSeller().getLastName());
                     return offerAllServiceModel;
-                }).orElseThrow(() -> new ObjectNotFoundException());
+                }).orElse(null);
         return offerAllinfo;
     }
 
 }
-
+// }).orElseThrow(() -> new ObjectNotFoundException());
 
 //        taskNew.setPriority(priorityService.findTaskByPriorityNameEnum(taskServiceModel.getPriorityNameEnum()));
