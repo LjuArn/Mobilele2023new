@@ -1,9 +1,11 @@
 package com.example.mobilele2023new.service;
 
 import com.example.mobilele2023new.domain.entity.UserEntity;
+import com.example.mobilele2023new.domain.events.UserRegisteredEvent;
 import com.example.mobilele2023new.domain.serviceModel.UserServiceModel;
 import com.example.mobilele2023new.repository.UserRepository;
 import org.modelmapper.ModelMapper;
+import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -13,22 +15,28 @@ public class UserServiceImpl implements UserService {
     private final UserRepository userRepository;
     private final ModelMapper modelMapper;
     private final PasswordEncoder passwordEncoder;
+    private final ApplicationEventPublisher applicationEventPublisher;
 
-
-    public UserServiceImpl(UserRepository userRepository, ModelMapper modelMapper, PasswordEncoder passwordEncoder) {
+    public UserServiceImpl(UserRepository userRepository, ModelMapper modelMapper,
+                           PasswordEncoder passwordEncoder,
+                           ApplicationEventPublisher applicationEventPublisher) {
         this.userRepository = userRepository;
         this.modelMapper = modelMapper;
         this.passwordEncoder = passwordEncoder;
+        this.applicationEventPublisher = applicationEventPublisher;
     }
 
 
     @Override
     public void registerUser(UserServiceModel userServiceModel) {
         UserEntity user = modelMapper.map(userServiceModel, UserEntity.class);
+        user.setActive(false);
         user.setPassword(passwordEncoder.encode(userServiceModel.getPassword()));
         userRepository.save(user);
-    }
 
+        applicationEventPublisher
+                .publishEvent(new UserRegisteredEvent("UserService", userServiceModel.getEmail()));
+    }
 
 
 //    @Override
@@ -39,13 +47,6 @@ public class UserServiceImpl implements UserService {
 //
 //        userRepository.save(user);
 //    }
-
-
-
-
-
-
-
 
 
 //    @Override

@@ -5,6 +5,7 @@ import com.example.mobilele2023new.domain.serviceModel.CreateOfferModel;
 import com.example.mobilele2023new.domain.serviceModel.OfferAllServiceModel;
 import com.example.mobilele2023new.domain.serviceModel.OfferSummeryModel;
 import com.example.mobilele2023new.repository.OfferRepository;
+import com.example.mobilele2023new.service.exeption.ObjectNotFoundClass;
 import org.hibernate.ObjectNotFoundException;
 import org.modelmapper.ModelMapper;
 import org.springframework.data.domain.Page;
@@ -58,11 +59,10 @@ public class OfferServiceImpl implements OfferService {
                     OfferAllServiceModel offerAllServiceModel = modelMapper.map(offerEntity, OfferAllServiceModel.class);
                     offerAllServiceModel.setModel(offerEntity.getModel().getName());
                     offerAllServiceModel.setBrand(offerEntity.getModel().getBrand().getName());
+                    offerAllServiceModel.setSeller(offerEntity.getSeller().getFirstName());
 
-                //    offerAllServiceModel.setSeller(offerEntity.getSeller().getFirstName());
-               //     offerAllServiceModel.setSeller(offerEntity.getSeller().getLastName());
                     return offerAllServiceModel;
-                }).orElse(null);
+                }).orElseThrow(() -> new ObjectNotFoundClass("Not found" + id + "object"));
         return offerAllinfo;
     }
 
