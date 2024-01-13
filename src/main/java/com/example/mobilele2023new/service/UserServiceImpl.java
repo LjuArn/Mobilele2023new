@@ -35,7 +35,9 @@ public class UserServiceImpl implements UserService {
         userRepository.save(user);
 
         applicationEventPublisher
-                .publishEvent(new UserRegisteredEvent("UserService", userServiceModel.getEmail()));
+                .publishEvent(new UserRegisteredEvent("UserService",
+                        userServiceModel.getEmail(),
+                        userServiceModel.getUsername()));
     }
 
 
